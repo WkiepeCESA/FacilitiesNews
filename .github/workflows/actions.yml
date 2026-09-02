@@ -3,9 +3,12 @@ name: Run GetArticles Daily
 on:
   schedule:
     # Runs at 15:40 UTC (3:40 PM UTC) every day
-    - cron: '40 15 * * *'
+    - cron: '15 16 * * *'
   # Allows manual runs via the GitHub UI
   workflow_dispatch:
+
+permissions:
+  contents: write
 
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: 'true'
@@ -30,3 +33,10 @@ jobs:
 
       - name: Run GetArticles script
         run: python GetArticles.py
+
+      - name: Commit and push CSV changes
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add renovation_matches.csv
+          git diff --staged --quiet || (git commit -m "Automated update of RSS CSV output" && git push)
