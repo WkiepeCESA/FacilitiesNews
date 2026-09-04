@@ -11,7 +11,7 @@ SCRIPT_DIR = Path(__file__).resolve().parent
 INPUT_CSV = SCRIPT_DIR / "private_schools_list.csv"
 OUTPUT_CSV = SCRIPT_DIR / "renovation_matches.csv"
 
-LOOKBACK_HOURS = 24
+LOOKBACK_HOURS = 24*7
 KEYWORDS = '(renovation OR construction OR expansion OR groundbreaking OR "building project")'
 
 # Override default feedparser header to mimic a standard Chrome browser
@@ -62,15 +62,16 @@ def main():
     results = []
 
     for idx, school in enumerate(schools, 1):
-        print(f"[{idx}/{len(schools)}] Checking: {school}")
-        matches = check_school_news(school)
+        if idx <= 100: #Reduce the number of schools to check for testing purposes
+            print(f"[{idx}/{len(schools)}] Checking: {school}")
+            matches = check_school_news(school)
 
-        if matches:
-            results.extend(matches)
-            print(f"  --> Found {len(matches)} matching article(s)!")
+            if matches:
+                results.extend(matches)
+                print(f"  --> Found {len(matches)} matching article(s)!")
 
-            # Randomized delay (2.0 to 4.0s) to prevent request pattern detection
-        time.sleep(random.uniform(2.0, 4.0))
+                # Randomized delay (2.0 to 4.0s) to prevent request pattern detection
+            time.sleep(random.uniform(2.0, 4.0))
 
     if results:
         df_new = pd.DataFrame(results)
