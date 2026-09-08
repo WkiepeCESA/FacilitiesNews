@@ -62,16 +62,15 @@ def main():
     results = []
 
     for idx, school in enumerate(schools, 1):
-        if idx <= 100: #Reduce the number of schools to check for testing purposes
-            print(f"[{idx}/{len(schools)}] Checking: {school}")
-            matches = check_school_news(school)
+        print(f"[{idx}/{len(schools)}] Checking: {school}")
+        matches = check_school_news(school)
 
-            if matches:
-                results.extend(matches)
-                print(f"  --> Found {len(matches)} matching article(s)!")
+        if matches:
+            results.extend(matches)
+            print(f"  --> Found {len(matches)} matching article(s)!")
 
-                # Randomized delay (2.0 to 4.0s) to prevent request pattern detection
-            time.sleep(random.uniform(2.0, 4.0))
+            # Randomized delay (2.0 to 4.0s) to prevent request pattern detection
+        time.sleep(random.uniform(2.0, 4.0))
 
     if results:
         df_new = pd.DataFrame(results)
