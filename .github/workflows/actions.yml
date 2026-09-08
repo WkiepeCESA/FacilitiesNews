@@ -3,7 +3,7 @@ name: Run GetArticles Daily
 on:
   schedule:
     # Runs at 19:20 UTC (1:20 PM PST) every day
-    - cron: '35 8 * * *' 
+    - cron: '0 0 * * 3' 
   # Allows manual runs via the GitHub UI
   workflow_dispatch:
 
