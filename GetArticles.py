@@ -9,7 +9,7 @@ import pandas as pd
 # Directory setup
 SCRIPT_DIR = Path(__file__).resolve().parent
 INPUT_CSV = SCRIPT_DIR / "private_schools_list.csv"
-OUTPUT_CSV = SCRIPT_DIR / "C:/Users/wkiepe/OneDrive - Cooperative Educational Service Agency 10/RenovationProjects/renovation_matches.csv"
+OUTPUT_CSV = SCRIPT_DIR / "renovation_matches.csv"
 
 LOOKBACK_HOURS = 24*7
 KEYWORDS = '(renovation OR construction OR expansion OR groundbreaking OR "building project")'
