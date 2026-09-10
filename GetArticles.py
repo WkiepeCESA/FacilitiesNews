@@ -62,7 +62,7 @@ def main():
     results = []
 
     for idx, school in enumerate(schools, 1):
-        if idx <= 3: #limit to 3 schools for testing
+        if idx <= 10: #limit to 10 schools for testing
             print(f"[{idx}/{len(schools)}] Checking: {school}")
             matches = check_school_news(school)
 
