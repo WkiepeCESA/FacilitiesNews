@@ -11,7 +11,7 @@ SCRIPT_DIR = Path(__file__).resolve().parent
 INPUT_CSV = SCRIPT_DIR / "private_schools_list.csv"
 OUTPUT_CSV = SCRIPT_DIR / "renovation_matches.csv"
 
-LOOKBACK_HOURS = 24*7
+LOOKBACK_HOURS = 25*7
 KEYWORDS = '(renovation OR construction OR expansion OR groundbreaking OR "building project")'
 
 # Override default feedparser header to mimic a standard Chrome browser
@@ -20,7 +20,7 @@ feedparser.USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/5
 
 def check_school_news(school_name: str) -> list[dict]:
     """Queries Google News RSS for a single school and returns articles from the last N hours."""
-    query = f'"{school_name}" AND {KEYWORDS}'
+    query = f'"{school_name}" AND {KEYWORDS}' #TODO put back in AND {KEYWORDS}
     encoded_query = urllib.parse.quote(query)
     rss_url = f"https://news.google.com/rss/search?q={encoded_query}&hl=en-US&gl=US&ceid=US:en"
 
@@ -62,16 +62,15 @@ def main():
     results = []
 
     for idx, school in enumerate(schools, 1):
-        if idx <= 10: #limit to 10 schools for testing
-            print(f"[{idx}/{len(schools)}] Checking: {school}")
-            matches = check_school_news(school)
+        print(f"[{idx}/{len(schools)}] Checking: {school}")
+        matches = check_school_news(school)
 
-            if matches:
-                results.extend(matches)
-                print(f"  --> Found {len(matches)} matching article(s)!")
+        if matches:
+            results.extend(matches)
+            print(f"  --> Found {len(matches)} matching article(s)!")
 
-                # Randomized delay (2.0 to 4.0s) to prevent request pattern detection
-            time.sleep(random.uniform(2.0, 4.0))
+            # Randomized delay (2.0 to 4.0s) to prevent request pattern detection
+        time.sleep(random.uniform(2.0, 4.0))
 
     if results:
         df_new = pd.DataFrame(results)
