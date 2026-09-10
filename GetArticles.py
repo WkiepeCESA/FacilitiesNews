@@ -62,7 +62,7 @@ def main():
     results = []
 
     for idx, school in enumerate(schools, 1):
-        if idx <= 10: #limit to 10 schools for testing
+        if idx <= 3: #limit to 3 schools for testing
             print(f"[{idx}/{len(schools)}] Checking: {school}")
             matches = check_school_news(school)
 
@@ -99,6 +99,7 @@ def main():
             OUTPUT_CSV, mode="a", index=False, header=not file_exists
         )
         print("\nFinished! No renovation articles found today.")
+
 
 
 if __name__ == "__main__":
