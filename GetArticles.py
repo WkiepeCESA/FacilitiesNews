@@ -12,7 +12,7 @@ INPUT_CSV = SCRIPT_DIR / "private_schools_list.csv"
 OUTPUT_CSV = SCRIPT_DIR / "renovation_matches.csv"
 
 LOOKBACK_HOURS = 25*7
-KEYWORDS = '(renovation OR construction OR expansion OR groundbreaking OR "building project")'
+KEYWORDS = '(renovation OR construction OR expansion OR groundbreaking OR "building project" OR HVAC OR LED OR lighting OR addition)'
 
 # Override default feedparser header to mimic a standard Chrome browser
 feedparser.USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
